@@ -24,7 +24,7 @@ export class RecipeControllers {
    }
 
    async getMany(req: Request, res: Response): Promise<Response<TRecipe[]>> {
-      const { id: restaurantId } = res.locals.decode;
+      const restaurantId = req.params.restaurantId;
 
       const categoryId = req.query.categoryId;
 
