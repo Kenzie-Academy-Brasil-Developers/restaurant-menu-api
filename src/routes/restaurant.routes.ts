@@ -15,28 +15,26 @@ container.registerSingleton("RestaurantServices", RestaurantServices);
 
 const restaurantControllers = container.resolve(RestaurantControllers);
 
-restaurantRoutes.post(
+restaurantRouter.post(
    "/",
    ValidateBody.execute(restaurantRegisterBodySchema),
-   (req, res) => restaurantControllers.register
+   (req, res) => restaurantControllers.register(req, res)
 );
 
-restaurantRoutes.post(
+restaurantRouter.post(
    "/login",
    ValidateBody.execute(restaurantLoginBodySchema),
-   (req, res) => restaurantControllers.login
+   (req, res) => restaurantControllers.login(req, res)
 );
 
-restaurantRoutes.get(
-   "/profile",
-   VerifyToken.execute,
-   (req, res) => restaurantControllers.getRestaurant
+restaurantRouter.get("/profile", VerifyToken.execute, (req, res) =>
+   restaurantControllers.getRestaurant(req, res)
 );
 
-restaurantRoutes.patch("/", VerifyToken.execute, (req, res) =>
+restaurantRouter.patch("/", VerifyToken.execute, (req, res) =>
    restaurantControllers.update(req, res)
 );
 
-restaurantRoutes.get("/", (req, res) =>
+restaurantRouter.get("/", (req, res) =>
    restaurantControllers.getManyRestaurants(req, res)
 );
