@@ -30,3 +30,8 @@ export type TRestaurantLoginReturn = {
     accessToken: string;
     restaurant: TRestaurantReturn
 }
+
+
+export const publicRestaurantReturn = restaurantSchema.pick({ id: true, name: true, description: true });
+
+export type TPublicRestaurant = z.infer<typeof publicRestaurantReturn>;

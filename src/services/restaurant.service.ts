@@ -1,11 +1,13 @@
 import { prisma } from "../database/prisma";
 import { AppError } from "../errors/AppError";
 import {
+    TPublicRestaurant,
    TRestaurantLoginBody,
    TRestaurantLoginReturn,
    TRestaurantRegisterBody,
    TRestaurantReturn,
    TRestaurantUpdateBody,
+   publicRestaurantReturn,
    restaurantReturnSchema,
 } from "../schemas/restaurant.schema";
 import bcrypt from "bcrypt";
@@ -53,7 +55,10 @@ export class RestaurantServices {
       };
    }
 
-   async update(body: TRestaurantUpdateBody, restaurantId: string): Promise<TRestaurantReturn> {
+   async update(
+      body: TRestaurantUpdateBody,
+      restaurantId: string
+   ): Promise<TRestaurantReturn> {
       const restaurant = await prisma.restaurant.update({
          where: { id: restaurantId },
          data: body,
@@ -68,5 +73,15 @@ export class RestaurantServices {
       });
 
       return restaurantReturnSchema.parse(restaurant);
+   }
+
+   async getManyRestaurants(): Promise<TPublicRestaurant[]> {
+      const restaurants = await prisma.restaurant.findMany();
+
+      const publicRestaurants = restaurants.map((restaurant) =>
+         publicRestaurantReturn.parse(restaurant)
+      );
+
+      return publicRestaurants;
    }
 }
