@@ -1,3 +1,4 @@
+import { injectable } from "tsyringe";
 import { prisma } from "../database/prisma";
 import { AppError } from "../errors/AppError";
 import {
@@ -13,6 +14,7 @@ import {
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+@injectable()
 export class RestaurantServices {
    async register(body: TRestaurantRegisterBody): Promise<TRestaurantReturn> {
       const existingRestaurant = await prisma.restaurant.findFirst({
