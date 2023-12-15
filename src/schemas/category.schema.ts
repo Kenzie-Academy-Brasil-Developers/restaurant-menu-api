@@ -7,3 +7,11 @@ export const categorySchema = z.object({
 });
 
 export type TCategory = z.infer<typeof categorySchema>;
+
+export const categoryCreateBodySchema = categorySchema.pick({ name: true });
+
+export type TCategoryCreateBody = z.infer<typeof categoryCreateBodySchema>;
+
+export const categoryUpdateBodySchema = categoryCreateBodySchema.partial(); 
+
+export type TCategoryUpdateBody = z.infer<typeof categoryUpdateBodySchema>;
