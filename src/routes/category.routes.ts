@@ -9,6 +9,7 @@ import {
    categoryUpdateBodySchema,
 } from "../schemas/category.schema";
 import { IsRestaurantIdValid } from "../middleware/isRestaurantIdValid.middleware";
+import { IsCategoryIdValid } from "../middleware/isCategoryIdValid.middleware";
 
 export const categoryRouter = Router();
 
@@ -17,8 +18,8 @@ const categoryControllers = container.resolve(CategoryControllers);
 
 categoryRouter.post(
    "/",
-   VerifyToken.execute,
    ValidateBody.execute(categoryCreateBodySchema),
+   VerifyToken.execute,
    (req, res) => categoryControllers.create(req, res)
 );
 categoryRouter.get("/:restaurantId", IsRestaurantIdValid.execute, (req, res) =>
@@ -26,10 +27,14 @@ categoryRouter.get("/:restaurantId", IsRestaurantIdValid.execute, (req, res) =>
 );
 categoryRouter.patch(
    "/:id",
-   VerifyToken.execute,
    ValidateBody.execute(categoryUpdateBodySchema),
+   VerifyToken.execute,
+   IsCategoryIdValid.execute,
    (req, res) => categoryControllers.update(req, res)
 );
-categoryRouter.delete("/:id", VerifyToken.execute, (req, res) =>
-   categoryControllers.delete(req, res)
+categoryRouter.delete(
+   "/:id",
+   VerifyToken.execute,
+   IsCategoryIdValid.execute,
+   (req, res) => categoryControllers.delete(req, res)
 );
