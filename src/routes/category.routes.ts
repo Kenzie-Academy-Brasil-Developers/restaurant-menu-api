@@ -10,6 +10,7 @@ import {
 } from "../schemas/category.schema";
 import { IsRestaurantIdValid } from "../middleware/isRestaurantIdValid.middleware";
 import { IsCategoryIdValid } from "../middleware/isCategoryIdValid.middleware";
+import { IsRestaurantCategoryOwner } from "../middleware/isRestaurantCategoryOwner.middleware";
 
 export const categoryRouter = Router();
 
@@ -30,11 +31,13 @@ categoryRouter.patch(
    ValidateBody.execute(categoryUpdateBodySchema),
    VerifyToken.execute,
    IsCategoryIdValid.execute,
+   IsRestaurantCategoryOwner.execute,
    (req, res) => categoryControllers.update(req, res)
 );
 categoryRouter.delete(
    "/:id",
    VerifyToken.execute,
    IsCategoryIdValid.execute,
+   IsRestaurantCategoryOwner.execute,
    (req, res) => categoryControllers.delete(req, res)
 );

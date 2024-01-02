@@ -7,6 +7,7 @@ import { recipeCreateBodySchema, recipeUpdateBodySchema } from "../schemas/recip
 import { VerifyToken } from "../middleware/verifyToken.middleware";
 import { IsRestaurantIdValid } from "../middleware/isRestaurantIdValid.middleware";
 import { IsRecipeIdValid } from "../middleware/isRecipeIdValid.middleware";
+import { IsRestaurantRecipeOwner } from "../middleware/isRestaurantRecipeOwner.middleware";
 
 export const recipeRouter = Router();
 
@@ -34,9 +35,14 @@ recipeRouter.patch(
    ValidateBody.execute(recipeUpdateBodySchema),
    VerifyToken.execute,
    IsRecipeIdValid.execute,
+   IsRestaurantRecipeOwner.execute,
    (req, res) => recipeControllers.update(req, res)
 );
 
-recipeRouter.delete("/:id", VerifyToken.execute, IsRecipeIdValid.execute, (req, res) =>
-   recipeControllers.delete(req, res)
+recipeRouter.delete(
+   "/:id",
+   VerifyToken.execute,
+   IsRecipeIdValid.execute,
+   IsRestaurantRecipeOwner.execute,
+   (req, res) => recipeControllers.delete(req, res)
 );
