@@ -9,7 +9,7 @@ export const restaurant = {
 };
 
 export const restaurantListMock = [
-    restaurant
+    restaurant,
 ];
 
 export const restaurantReturnListMock = [
@@ -32,11 +32,28 @@ export const restaurantMock = async () => {
    };
 };
 
+export const restaurantCreateDataMock = async () => {
+   const hashPassword = await bcrypt.hash(restaurant.password, 10);
+
+   return {
+      name: restaurant.name,
+      email: restaurant.email,
+      description: restaurant.description,
+      password: hashPassword,
+   };
+}
+
 export const restaurantCreateBodyMock = {
    name: restaurant.name,
    email: restaurant.email,
    password: restaurant.password,
 };
+
+export const restaurantWrongCreateBodyMock = {
+   name: 123,
+   email: 123,
+   password: 123,
+}
 
 export const restaurantLoginBodyMock = {
    email: restaurant.email,
@@ -47,6 +64,11 @@ export const restaurantLoginWrongPasswordBodyMock = {
    email: restaurant.email,
    password: "87654321",
 };
+
+export const restaurantWrongLoginBodyMock = {
+   email: 321,
+   password: 321,
+}
 
 export const restaurantUpdateBodyMock = {
    description: "Description example",
