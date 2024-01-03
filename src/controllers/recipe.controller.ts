@@ -30,7 +30,7 @@ export class RecipeControllers {
 
       const response = await this.recipeServices.getMany(
          restaurantId,
-         String(categoryId)
+         categoryId ? String(categoryId) : categoryId
       );
 
       return res.status(200).json(response);

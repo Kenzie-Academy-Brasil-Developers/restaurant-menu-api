@@ -20,7 +20,7 @@ export class RecipeServices {
 
    async getMany(restaurantId: string, categoryId?: string): Promise<TRecipe[]> {
       const recipes = await prisma.recipe.findMany({
-         where: { restaurantId },
+         where: { restaurantId, categoryId },
       });
 
       return recipes;
