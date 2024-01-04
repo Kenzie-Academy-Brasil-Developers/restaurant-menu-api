@@ -8,17 +8,15 @@ export const restaurant = {
    password: "12345678",
 };
 
-export const restaurantListMock = [
-    restaurant,
-];
+export const restaurantListMock = [restaurant];
 
 export const restaurantReturnListMock = [
-    {
-        id: restaurant.id,
-        name: restaurant.name,
-        description: restaurant.description
-    }
-]
+   {
+      id: restaurant.id,
+      name: restaurant.name,
+      description: restaurant.description,
+   },
+];
 
 export const restaurantMock = async () => {
    const hashPassword = await bcrypt.hash(restaurant.password, 10);
@@ -41,7 +39,7 @@ export const restaurantCreateDataMock = async () => {
       description: restaurant.description,
       password: hashPassword,
    };
-}
+};
 
 export const restaurantCreateBodyMock = {
    name: restaurant.name,
@@ -49,12 +47,11 @@ export const restaurantCreateBodyMock = {
    password: restaurant.password,
 };
 
-
 export const restaurantWrongCreateBodyMock = {
    name: 123,
    email: 123,
    password: 123,
-}
+};
 
 export const restaurantLoginBodyMock = {
    email: restaurant.email,
@@ -69,7 +66,7 @@ export const restaurantLoginWrongPasswordBodyMock = {
 export const restaurantWrongLoginBodyMock = {
    email: 321,
    password: 321,
-}
+};
 
 export const restaurantUpdateBodyMock = {
    description: "Description example",
