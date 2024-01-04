@@ -26,9 +26,9 @@ model Recipe{
   description String
   price Int
   restaurantId String
-  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
   categoryId String?
-  category Category? @relation(fields: [categoryId], references: [id])
+  category Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
 }
 
 model Category{
@@ -36,5 +36,5 @@ model Category{
   name String
   recipes Recipe[]
   restaurantId String
-  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
 }

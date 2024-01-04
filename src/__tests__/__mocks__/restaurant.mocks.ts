@@ -49,6 +49,7 @@ export const restaurantCreateBodyMock = {
    password: restaurant.password,
 };
 
+
 export const restaurantWrongCreateBodyMock = {
    name: 123,
    email: 123,

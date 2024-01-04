@@ -9,6 +9,14 @@ export const recipeMock = {
    categoryId: null
 };
 
+export const restaurantRecipeCreateDataMock = (restaurantId: string) => ({
+   name: "Recipe",
+   description: "This is a recipe",
+   price: 1234,
+   restaurantId,
+   categoryId: null
+});
+
 export const secondRecipeMock = {
    id: "f7b9dc3d-9b99-4daf-9bce-f3d977ad2118",
    name: "Recipe 2",
@@ -33,6 +41,20 @@ export const recipeCreateBodyMock = {
    price: recipeMock.price,
 };
 
+export const recipeWrongCreateBodyMock = {
+   name: 123,
+   description: 123,
+   price: "Text",
+   categoryId: 123,
+}
+
+export const recipeWrongUpdateBodyMock = {
+   name: 123,
+   description: 123,
+   price: "Text",
+   categoryId: 123,
+}
+
 export const recipeListMock = [recipeMock, secondRecipeMock];
 
 
@@ -42,3 +64,10 @@ export const recipeUpdateBodyMock = {
    price: updatedRecipeMock.price,
    categoryId: updatedRecipeMock.categoryId
 };
+
+export const recipeUpdateDataMock = (categoryId: string | null) => ({
+   name: updatedRecipeMock.name,
+   description: updatedRecipeMock.description,
+   price: updatedRecipeMock.price,
+   categoryId,
+});
